@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ChristmasGiftGame.csproj">
+    <Deploy />
+  </Project>
+</Solution>
