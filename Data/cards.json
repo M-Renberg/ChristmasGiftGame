@@ -1,0 +1,29 @@
+{
+  "Cards": [
+    "Alla flyttar ett steg till höger",
+    "Alla flyttar ett steg till höger",
+    "Alla flyttar ett steg till höger",
+    "Alla flyttar två steg till höger",
+    "Alla flyttar tre steg till höger",
+    "Alla flyttar ett steg till vänster",
+    "Alla flyttar ett steg till vänster",
+    "Alla flyttar tv� steg till vänster",
+    "Alla flyttar tv� steg till vänster",
+    "Alla flyttar tre steg till vänster",
+    "Byta plats med den till höger om dig",
+    "Byta plats med den till vänster om dig",
+    "Byta plats med den mittemot dig",
+    "Ta ett valfritt paket",
+    "Ge bort ett valfritt paket",
+    "Ta ett paket från den till vänster om dig",
+    "Ta ett paket från den till höger om dig",
+    "Byta ett paket med den till höger om dig",
+    "Byta ett paket med den till vänster om dig",
+    "Ge ett paket till den som har färst paket",
+    "Ta ett paket från den som har flest paket",
+    "Byta plats med den som har först paket",
+    "Byta plats med den som har flest paket",
+    "Ta det största paketet",
+    "Ta det minsta paketet"
+  ]
+}

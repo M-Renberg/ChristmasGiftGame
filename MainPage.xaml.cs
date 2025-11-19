@@ -2,23 +2,28 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
+        private GameViewModel ViewModel = new();
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = ViewModel;
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        void AddPlayer_Clicked(object sender, EventArgs e)
         {
-            count++;
+            if (!string.IsNullOrWhiteSpace(PlayerEntry.Text))
+            {
+                ViewModel.Players.Add(new Player { PlayerName = PlayerEntry.Text });
+                PlayerEntry.Text = "";
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+                ViewModel.GenerateCards();
+            }
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        void DrawCard_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.DrawCard();
+            //OnPropertyChanged(nameof(ViewModel.CurrentCard));
         }
     }
 }
