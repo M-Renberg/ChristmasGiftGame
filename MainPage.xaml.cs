@@ -20,10 +20,13 @@
             }
         }
 
-        void DrawCard_Clicked(object sender, EventArgs e)
+        async void DrawCard_Clicked(object sender, EventArgs e)
         {
             ViewModel.DrawCard();
-            //OnPropertyChanged(nameof(ViewModel.CurrentCard));
+
+            await CardInPlay.ScaleToAsync(0.9, 120);
+            await CardInPlay.ScaleToAsync(1.0, 120);
         }
+
     }
 }

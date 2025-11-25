@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChristmasGiftGame.MainPage">
+             x:Class="ChristmasGiftGame.MainPage"
+             BackgroundColor="Red">
 
     <ScrollView>
         <VerticalStackLayout
@@ -9,20 +10,67 @@
             Spacing="25">
 
             <Label
-                Text="Christmas Gift Game" FontSize="24" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" TextColor="White" HorizontalOptions="Center"/>
-            <Entry x:Name="PlayerEntry" Placeholder="lägg till spelare: "/>
-            <Button Text="Lägg till" Clicked="AddPlayer_Clicked"/>
+                Text="Christmas Gift Game" 
+                FontSize="26" 
+                Style="{StaticResource Headline}" 
+                SemanticProperties.HeadingLevel="Level1" 
+                TextColor="AntiqueWhite" 
+                HorizontalOptions="Center" 
+                FontAttributes="Bold" 
+                Padding="20"/>
+            <Entry x:Name="PlayerEntry" 
+                   Placeholder="lägg till spelare: " 
+                   BackgroundColor="AntiqueWhite"
+                   TextColor="Black"
+                   MaximumWidthRequest="400"/>
+            <Button Text="Lägg till" 
+                    Clicked="AddPlayer_Clicked" 
+                    MaximumWidthRequest="400"/>
             <CollectionView ItemsSource="{Binding Players}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Name}" TextColor="White"/>
+                        <Label Text="{Binding Name}" TextColor="Black"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Dra kort" Clicked="DrawCard_Clicked"/>
-            <Label Text="{Binding CurrentCard}" FontSize="18" TextColor="White"/>
+            <Button 
+                Text="Dra kort" 
+                Clicked="DrawCard_Clicked"
+                MaximumWidthRequest="400"/>
+            <Border
+                x:Name="CardInPlay"
+                BackgroundColor="White"
+                Stroke="DarkRed"
+                StrokeShape="RoundRectangle 10"
+                Padding="20"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                </Border.Shadow>
 
+                <Grid RowDefinitions="Auto, *" ColumnDefinitions="*">
+                    <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                    <Image
+                        Source="{Binding CardImage}"
+                        Aspect="AspectFit"
+                        Opacity="0.9"
+                        VerticalOptions="Center"
+                        WidthRequest="80"
+                        />
+
+                    <Label Text="{Binding CurrentCard}" 
+                       FontSize="24" 
+                       TextColor="Black" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center"
+                       MaximumHeightRequest="300"
+                       LineBreakMode="WordWrap"/>
+                </HorizontalStackLayout>
+                </Grid>
+                </Border>
+            
         </VerticalStackLayout>
     </ScrollView>
 
