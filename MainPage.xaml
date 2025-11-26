@@ -2,10 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChristmasGiftGame.MainPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              BackgroundColor="Red">
+    <Grid>
 
-    <ScrollView>
-        <VerticalStackLayout
+
+        <skia:SKLottieView
+            Source="Snow.json"
+            RepeatCount="-1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            InputTransparent="True" />
+
+        <ScrollView>
+
+            <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
 
@@ -25,7 +36,9 @@
                    MaximumWidthRequest="400"/>
             <Button Text="Lägg till" 
                     Clicked="AddPlayer_Clicked" 
-                    MaximumWidthRequest="400"/>
+                    MaximumWidthRequest="400"
+                    FontSize="22"
+                    BackgroundColor="DarkSeaGreen"/>
             <CollectionView ItemsSource="{Binding Players}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -37,7 +50,9 @@
             <Button 
                 Text="Dra kort" 
                 Clicked="DrawCard_Clicked"
-                MaximumWidthRequest="400"/>
+                MaximumWidthRequest="400"
+                FontSize="22"
+                BackgroundColor="DarkSeaGreen"/>
             <Border
                 x:Name="CardInPlay"
                 BackgroundColor="White"
@@ -72,6 +87,8 @@
                 </Border>
             
         </VerticalStackLayout>
+        
     </ScrollView>
+    </Grid>
 
 </ContentPage>
