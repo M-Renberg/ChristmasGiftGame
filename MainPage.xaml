@@ -19,55 +19,108 @@
             <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-
-            <Label
+                <!-- When adding players  -->
+                <Label
                 Text="Christmas Gift Game" 
-                FontSize="26" 
+                FontSize="32" 
                 Style="{StaticResource Headline}" 
                 SemanticProperties.HeadingLevel="Level1" 
                 TextColor="AntiqueWhite" 
                 HorizontalOptions="Center" 
-                FontAttributes="Bold" 
+                FontAttributes="Bold"
+                FontFamily="Miriam"
                 Padding="20"/>
-            <Entry x:Name="PlayerEntry" 
+                <Entry x:Name="PlayerEntry" 
+                   IsVisible="True"
                    Placeholder="lägg till spelare: " 
                    BackgroundColor="AntiqueWhite"
                    TextColor="Black"
                    MaximumWidthRequest="400"/>
-            <Button Text="Lägg till" 
+
+                <Button Text="Lägg till"
+                    x:Name="AddPlayer"
                     Clicked="AddPlayer_Clicked" 
                     MaximumWidthRequest="400"
                     FontSize="22"
-                    BackgroundColor="DarkSeaGreen"/>
-            <CollectionView ItemsSource="{Binding Players}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Name}" TextColor="Black"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <Button 
-                Text="Dra kort" 
+                    BackgroundColor="DarkSeaGreen">
+                    <Button.Shadow>
+                        <Shadow
+                            Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
+                <!--start game-->
+                <Button Text="Starta spelet"
+                    x:Name="StartGame"
+                    IsVisible="true"
+                    Clicked="StartGame_Clicked" 
+                    MaximumWidthRequest="400"
+                    FontSize="22"
+                    BackgroundColor="DarkSeaGreen">
+                    <Button.Shadow>
+                        <Shadow
+                            Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
+                <!-- When playing the game -->
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Border
+                    x:Name="PlayerList"
+                    IsVisible="False"
+                    BackgroundColor="White"
+                    Stroke="DarkRed"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="20"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                        <Grid RowDefinitions="auto, *">
+                            <Label Text="Spelare:"
+                                   Grid.Row="0"
+                                   FontSize="26" 
+                                   TextColor="Black"
+                                   FontAttributes="Bold"/>
+                            <CollectionView ItemsSource="{Binding Players}" Grid.Row="1"> <!--display players-->
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Padding="10">
+                                            <Label Text="{Binding PlayerName}"
+                                               TextColor="Black"
+                                                FontSize="22"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Border>
+                </HorizontalStackLayout>
+                <Button 
+                Text="Dra kort"
+                x:Name="DrawCard"
+                IsVisible="false"
                 Clicked="DrawCard_Clicked"
                 MaximumWidthRequest="400"
                 FontSize="22"
-                BackgroundColor="DarkSeaGreen"/>
-            <Border
+                BackgroundColor="DarkSeaGreen">
+                    <Button.Shadow>
+                        <Shadow
+                         Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
+                <Border
                 x:Name="CardInPlay"
+                IsVisible="False"
                 BackgroundColor="White"
                 Stroke="DarkRed"
                 StrokeShape="RoundRectangle 10"
                 Padding="20"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
-                <Border.Shadow>
-                    <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                </Border.Shadow>
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Border.Shadow>
 
-                <Grid RowDefinitions="Auto, *" ColumnDefinitions="*">
-                    <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
-                    <Image
+                    <Grid RowDefinitions="Auto, *" ColumnDefinitions="*">
+                        <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                            <Image
                         Source="{Binding CardImage}"
                         Aspect="AspectFit"
                         Opacity="0.9"
@@ -75,20 +128,17 @@
                         WidthRequest="80"
                         />
 
-                    <Label Text="{Binding CurrentCard}" 
+                            <Label Text="{Binding CurrentCard}" 
                        FontSize="24" 
                        TextColor="Black" 
                        HorizontalTextAlignment="Center" 
                        VerticalTextAlignment="Center"
                        MaximumHeightRequest="300"
                        LineBreakMode="WordWrap"/>
-                </HorizontalStackLayout>
-                </Grid>
+                        </HorizontalStackLayout>
+                    </Grid>
                 </Border>
-            
-        </VerticalStackLayout>
-        
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
-
 </ContentPage>

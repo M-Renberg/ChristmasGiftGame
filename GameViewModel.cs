@@ -8,12 +8,12 @@ public class GameViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public string CardImage { get; set; }
+    public string? CardImage { get; set; }
 
     void OnPropertyChanged(string name) =>
     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-    public ObservableCollection<Player> Players = new();
+    public ObservableCollection<Player> Players { get; set; } = new();
     public ObservableCollection<Card> Cards = new();
 
     public Random random = new();
@@ -32,6 +32,8 @@ public class GameViewModel : INotifyPropertyChanged
         }
     }
 
+    
+
     public GameViewModel()
     {
         GenerateCards(); // add cards here
@@ -39,10 +41,15 @@ public class GameViewModel : INotifyPropertyChanged
 
     public void DrawCard()
     {
-        if (Cards.Count == 0) return;
+        if (Cards.Count == 0) 
+        {
+            Cards.Add(new Card { Text = "Spelet är nu slut. God jul" });
+            return;
+        }
 
         int index = random.Next(Cards.Count);
         CurrentCard = Cards[index].Text;
+        Cards.RemoveAt(index);
 
         int img = random.Next(1, 6);
         CardImage = $"card{img}.png";
@@ -104,10 +111,11 @@ public class GameViewModel : INotifyPropertyChanged
             Cards.Add(new Card { Text = "ni är 3 eller fler st" });
             foreach(var p in Players)
             {
-                Cards.Add(new Card { Text = $"{p} får ta ett valfritt paket" });
-                Cards.Add(new Card { Text = $"{p} måste ge bort ett valfritt paket" });
-                Cards.Add(new Card { Text = $"{p} måste byta plats med en annan spelare" });
+                Cards.Add(new Card { Text = $"{p.PlayerName} får ta ett valfritt paket" });
+                Cards.Add(new Card { Text = $"{p.PlayerName} måste ge bort ett valfritt paket" });
+                Cards.Add(new Card { Text = $"{p.PlayerName} måste byta plats med en annan spelare" });
             }
         }
     }
+
 }

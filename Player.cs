@@ -2,5 +2,5 @@ namespace ChristmasGiftGame;
 
 public class Player
 {
-    public string? PlayerName;
+    public string? PlayerName { get; set; }
 }
