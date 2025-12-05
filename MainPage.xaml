@@ -61,6 +61,15 @@
                             Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
+                <!--dice-->
+                
+                    <Border
+                        x:Name="dicetext">
+                        <Label Text=""/>
+                    </Border>
+                
+                
+                
                 <!-- When playing the game -->
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Border

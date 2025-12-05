@@ -15,6 +15,7 @@ public class GameViewModel : INotifyPropertyChanged
 
     public ObservableCollection<Player> Players { get; set; } = new();
     public ObservableCollection<Card> Cards = new();
+    
 
     public Random random = new();
 
@@ -32,6 +33,8 @@ public class GameViewModel : INotifyPropertyChanged
         }
     }
 
+    public string[] diceNumbers = ["1","2","3","4","5","6"];
+    public string? DiceSideShown;
     
 
     public GameViewModel()
@@ -115,6 +118,16 @@ public class GameViewModel : INotifyPropertyChanged
                 Cards.Add(new Card { Text = $"{p.PlayerName} måste ge bort ett valfritt paket" });
                 Cards.Add(new Card { Text = $"{p.PlayerName} måste byta plats med en annan spelare" });
             }
+        }
+    }
+
+    public void DiceRoll()
+    {
+        int index = random.Next(diceNumbers.Length);
+        DiceSideShown = diceNumbers[index];
+        if(DiceSideShown != null)
+        {
+            OnPropertyChanged(nameof(DiceSideShown));
         }
     }
 
