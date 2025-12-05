@@ -61,17 +61,61 @@
                             Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
-                <!--dice-->
                 
+                <!--inbetween-->
+                <Grid
+                    x:Name="MidGameGrid"
+                    RowDefinitions="Auto, *" 
+                    ColumnDefinitions="*"
+                    IsVisible="False">
+                    <Button
+                        x:Name="Playdice"
+                        Clicked="PlayDice_Clicked" 
+                        MaximumWidthRequest="400"
+                        FontSize="22"
+                        BackgroundColor="DarkSeaGreen">     
+
+                    </Button>
+                    <Button
+                        x:Name="RandomGiveGifts">
+                        
+                    </Button>
+                    <Button
+                        x:Name="PlayCards">
+                        
+                    </Button>
+                    <Button
+                        x:Name="BackFromMid">
+                        
+                    </Button>
+                 
+                    
+                </Grid>
+                <!--dice-->
+
                 <Border
-                    x:Name="DiceText">
-                        <Label Text="{Binding DiceSideShown}"/>
+                    x:Name="DiceText"
+                    IsVisible="True"
+                    BackgroundColor="AntiqueWhite"
+                    MaximumWidthRequest="150"
+                    MaximumHeightRequest="150"
+                    Stroke="DarkRed"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="20"
+                    >
+                    <Label Text="{Binding DiceSideShown}"
+                               FontSize="46"
+                               TextColor="{Binding DiceColor}"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
                 </Border>
                 <Button
                     x:Name="DiceRollButton"
                     Text="Press to roll dice"
                     IsVisible="True"
-                    Clicked="DiceRoll_Clicked">
+                    Clicked="DiceRoll_Clicked"
+                    BackgroundColor="DarkSeaGreen"
+                    MaximumWidthRequest="400">
                     <Button.Shadow>
                         <Shadow
                             Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
@@ -85,7 +129,7 @@
                     <Border
                     x:Name="PlayerList"
                     IsVisible="False"
-                    BackgroundColor="White"
+                    BackgroundColor="AntiqueWhite"
                     Stroke="DarkRed"
                     StrokeShape="RoundRectangle 10"
                     Padding="20"

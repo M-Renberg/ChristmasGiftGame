@@ -34,8 +34,34 @@ public class GameViewModel : INotifyPropertyChanged
     }
 
     public string[] diceNumbers = ["1","2","3","4","5","6"];
-    public string? DiceSideShown;
-    
+
+    private string? _diceSideShown;
+    public string? DiceSideShown
+    {
+        get => _diceSideShown;
+        set
+        {
+            
+          _diceSideShown = value;
+          OnPropertyChanged(nameof(DiceSideShown));
+            
+            
+        }
+    }
+    private Color _diceColor = Colors.Black; // Standardfärg
+    public Color DiceColor
+    {
+        get => _diceColor;
+        set
+        {
+            if (_diceColor != value)
+            {
+                _diceColor = value;
+                OnPropertyChanged(nameof(DiceColor));
+            }
+        }
+    }
+
 
     public GameViewModel()
     {
@@ -125,9 +151,14 @@ public class GameViewModel : INotifyPropertyChanged
     {
         int index = random.Next(diceNumbers.Length);
         DiceSideShown = diceNumbers[index];
-        if(DiceSideShown != null)
+
+        if (DiceSideShown == "1" || DiceSideShown == "6")
         {
-            OnPropertyChanged(nameof(DiceSideShown));
+            DiceColor = Colors.Red;
+        }
+        else
+        {
+            DiceColor = Colors.Black; 
         }
     }
 
