@@ -63,10 +63,20 @@
                 </Button>
                 <!--dice-->
                 
-                    <Border
-                        x:Name="dicetext">
-                        <Label Text=""/>
-                    </Border>
+                <Border
+                    x:Name="DiceText">
+                        <Label Text="{Binding DiceSideShown}"/>
+                </Border>
+                <Button
+                    x:Name="DiceRollButton"
+                    Text="Press to roll dice"
+                    IsVisible="True"
+                    Clicked="DiceRoll_Clicked">
+                    <Button.Shadow>
+                        <Shadow
+                            Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
                 
                 
                 

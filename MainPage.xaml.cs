@@ -52,5 +52,10 @@
             await CardInPlay.ScaleToAsync(1.0, 120);
         }
 
+        async void DiceRoll_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.DiceRoll();
+        }
+
     }
 }
