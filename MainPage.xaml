@@ -73,29 +73,51 @@
                         Clicked="PlayDice_Clicked" 
                         MaximumWidthRequest="400"
                         FontSize="22"
-                        BackgroundColor="DarkSeaGreen">     
-
+                        BackgroundColor="DarkSeaGreen"
+                        Text="Spela tärning">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                            </Button.Shadow>
+                        </Button>
+                    <Button
+                        x:Name="RandomGiveGifts"
+                        Clicked="RandomGiveGift_Clicked" 
+                        MaximumWidthRequest="400"
+                        FontSize="22"
+                        BackgroundColor="DarkSeaGreen"
+                        Text="Slumpa ut alla presenter till spelare">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
                     </Button>
                     <Button
-                        x:Name="RandomGiveGifts">
-                        
+                        x:Name="PlayCards"
+                        Clicked="PlayCards_Clicked" 
+                        MaximumWidthRequest="400"
+                        FontSize="22"
+                        BackgroundColor="DarkSeaGreen"
+                        Text="Spela julklaps spelet">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
                     </Button>
                     <Button
-                        x:Name="PlayCards">
-                        
+                        x:Name="BackFromMid"
+                        Clicked="BackMid_Clicked" 
+                        MaximumWidthRequest="400"
+                        FontSize="22"
+                        BackgroundColor="DarkSeaGreen"
+                        Text="Gå tillbaka">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
                     </Button>
-                    <Button
-                        x:Name="BackFromMid">
-                        
-                    </Button>
-                 
-                    
                 </Grid>
                 <!--dice-->
 
                 <Border
                     x:Name="DiceText"
-                    IsVisible="True"
+                    IsVisible="false"
                     BackgroundColor="AntiqueWhite"
                     MaximumWidthRequest="150"
                     MaximumHeightRequest="150"
@@ -112,7 +134,7 @@
                 <Button
                     x:Name="DiceRollButton"
                     Text="Press to roll dice"
-                    IsVisible="True"
+                    IsVisible="false"
                     Clicked="DiceRoll_Clicked"
                     BackgroundColor="DarkSeaGreen"
                     MaximumWidthRequest="400">

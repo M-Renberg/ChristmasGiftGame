@@ -31,11 +31,14 @@
             StartGame.IsVisible = false;
             AddPlayer.IsVisible = false;
             PlayerEntry.IsVisible = false;
-            PlayerList.IsVisible = true;
-            DrawCard.IsVisible = true;
-            
-
+            PlayerList.IsVisible = false;
+            DrawCard.IsVisible = false;
+            MidGameGrid.IsVisible = true;
         }
+        async void PlayDice_Clicked(object sender, EventArgs e){ }
+        async void RandomGiveGift_Clicked(object sender, EventArgs e) { }
+        async void PlayCards_Clicked(object sender, EventArgs e) { }
+        async void BackMid_Clicked(object sender, EventArgs e) { }
 
         async void DrawCard_Clicked(object sender, EventArgs e)
         {
