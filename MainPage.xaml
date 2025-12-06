@@ -35,7 +35,8 @@
                    Placeholder="lägg till spelare: " 
                    BackgroundColor="AntiqueWhite"
                    TextColor="Black"
-                   MaximumWidthRequest="400"/>
+                   MaximumWidthRequest="400"
+                  />
 
                 <Button Text="Lägg till"
                     x:Name="AddPlayer"
@@ -66,10 +67,17 @@
                 <Grid
                     x:Name="MidGameGrid"
                     RowDefinitions="Auto, *" 
-                    ColumnDefinitions="*"
-                    IsVisible="False">
+                    ColumnDefinitions="Auto, *"
+                    IsVisible="False"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Padding="20">
                     <Button
                         x:Name="Playdice"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Padding="10"
+                        Margin="25"
                         Clicked="PlayDice_Clicked" 
                         MaximumWidthRequest="400"
                         FontSize="22"
@@ -81,17 +89,25 @@
                         </Button>
                     <Button
                         x:Name="RandomGiveGifts"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Padding="10"
+                        Margin="25"
                         Clicked="RandomGiveGift_Clicked" 
                         MaximumWidthRequest="400"
                         FontSize="22"
                         BackgroundColor="DarkSeaGreen"
-                        Text="Slumpa ut alla presenter till spelare">
+                        Text="Slumpa ut presenter">
                         <Button.Shadow>
                             <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                         </Button.Shadow>
                     </Button>
                     <Button
                         x:Name="PlayCards"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Padding="10"
+                        Margin="25"
                         Clicked="PlayCards_Clicked" 
                         MaximumWidthRequest="400"
                         FontSize="22"
@@ -103,6 +119,10 @@
                     </Button>
                     <Button
                         x:Name="BackFromMid"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Padding="10"
+                        Margin="25"
                         Clicked="BackMid_Clicked" 
                         MaximumWidthRequest="400"
                         FontSize="22"
