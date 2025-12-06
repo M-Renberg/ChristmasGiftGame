@@ -35,10 +35,37 @@
             DrawCard.IsVisible = false;
             MidGameGrid.IsVisible = true;
         }
-        async void PlayDice_Clicked(object sender, EventArgs e){ }
-        async void RandomGiveGift_Clicked(object sender, EventArgs e) { }
-        async void PlayCards_Clicked(object sender, EventArgs e) { }
-        async void BackMid_Clicked(object sender, EventArgs e) { }
+        async void PlayDice_Clicked(object sender, EventArgs e)
+        {
+            await PlayCards.ScaleToAsync(0.95, 120);
+            await PlayCards.ScaleToAsync(1, 120);
+            MidGameGrid.IsVisible = false;
+            DiceText.IsVisible = true;
+            DiceRollButton.IsVisible = true;
+        }
+        async void RandomGiveGift_Clicked(object sender, EventArgs e) 
+        {
+            await RandomGiveGifts.ScaleToAsync(0.95, 120);
+            await RandomGiveGifts.ScaleToAsync(1, 120);
+            MidGameGrid.IsVisible = false;
+        }
+        async void PlayCards_Clicked(object sender, EventArgs e) 
+        {
+            await PlayCards.ScaleToAsync(0.95, 120);
+            await PlayCards.ScaleToAsync(1, 120);
+            MidGameGrid.IsVisible = false;
+            PlayerList.IsVisible = true;
+            DrawCard.IsVisible = true;
+        }
+        async void BackMid_Clicked(object sender, EventArgs e) 
+        {
+            await BackFromMid.ScaleToAsync(0.95, 120);
+            await BackFromMid.ScaleToAsync(1, 120);
+            MidGameGrid.IsVisible = false;
+            PlayerEntry.IsVisible = true;
+            AddPlayer.IsVisible = true;
+            StartGame.IsVisible = true;
+        }
 
         async void DrawCard_Clicked(object sender, EventArgs e)
         {
@@ -57,7 +84,13 @@
 
         async void DiceRoll_Clicked(object sender, EventArgs e)
         {
+            await DiceRollButton.ScaleToAsync(0.98, 120);
+            await DiceRollButton.ScaleToAsync(1, 120);
+
             ViewModel.DiceRoll();
+
+            await DiceText.ScaleToAsync(0.9, 120);
+            await DiceText.ScaleToAsync(1, 120);
         }
 
     }

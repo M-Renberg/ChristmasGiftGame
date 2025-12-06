@@ -143,17 +143,16 @@
                     MaximumHeightRequest="150"
                     Stroke="DarkRed"
                     StrokeShape="RoundRectangle 10"
-                    Padding="20"
-                    >
+                    Padding="20">
                     <Label Text="{Binding DiceSideShown}"
-                               FontSize="46"
-                               TextColor="{Binding DiceColor}"
-                               VerticalTextAlignment="Center"
-                               HorizontalTextAlignment="Center"/>
+                           FontSize="46"
+                           TextColor="{Binding DiceColor}"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
                 </Border>
                 <Button
                     x:Name="DiceRollButton"
-                    Text="Press to roll dice"
+                    Text="Rulla tärning"
                     IsVisible="false"
                     Clicked="DiceRoll_Clicked"
                     BackgroundColor="DarkSeaGreen"
@@ -163,7 +162,30 @@
                             Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
-                
+                <Grid> <!--forsätt här-->
+                    <Button
+                      x:Name="BackFromDice"
+                      Text="Tillbaka"
+                      IsVisible="false"
+                      Clicked="DiceRoll_Clicked"
+                      BackgroundColor="DarkSeaGreen"
+                      MaximumWidthRequest="400">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+                    <Button
+                      x:Name="ContinueFromDice"
+                      Text="Fortsätt till"
+                      IsVisible="false"
+                      Clicked="DiceRoll_Clicked"
+                      BackgroundColor="DarkSeaGreen"
+                      MaximumWidthRequest="400">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+                </Grid>                
                 
                 
                 <!-- When playing the game -->
