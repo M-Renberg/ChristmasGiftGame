@@ -19,7 +19,7 @@
             <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-                <!-- When adding players  -->
+                <!-- Header  -->
                 <Label
                 Text="Christmas Gift Game" 
                 FontSize="32" 
@@ -30,6 +30,7 @@
                 FontAttributes="Bold"
                 FontFamily="Miriam"
                 Padding="20"/>
+                <!-- When adding players  -->
                 <Entry x:Name="PlayerEntry" 
                    IsVisible="True"
                    Placeholder="lägg till spelare: " 
@@ -72,8 +73,9 @@
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     Padding="20">
+                    <!--dice game-->
                     <Button
-                        x:Name="Playdice"
+                        x:Name="Playdice" 
                         Grid.Row="0"
                         Grid.Column="0"
                         Padding="10"
@@ -85,8 +87,9 @@
                         Text="Spela tärning">
                         <Button.Shadow>
                             <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                            </Button.Shadow>
-                        </Button>
+                        </Button.Shadow>
+                    </Button>
+                    <!--random gift-->
                     <Button
                         x:Name="RandomGiveGifts"
                         Grid.Row="0"
@@ -102,6 +105,7 @@
                             <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                         </Button.Shadow>
                     </Button>
+                    <!--card game-->
                     <Button
                         x:Name="PlayCards"
                         Grid.Row="1"
@@ -117,6 +121,7 @@
                             <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                         </Button.Shadow>
                     </Button>
+                    <!--back-->
                     <Button
                         x:Name="BackFromMid"
                         Grid.Row="1"
@@ -133,8 +138,43 @@
                         </Button.Shadow>
                     </Button>
                 </Grid>
+                <!--Options menu-->
+                <Grid
+                    RowDefinitions="Auto, *" 
+                    ColumnDefinitions="Auto, *"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Padding="20"
+                    x:Name="OptionMenu"
+                    IsVisible="False">
+                    <Button
+                      x:Name="BackOptionsMenu"
+                      Grid.Row="0"
+                      Grid.Column="0"
+                      Margin="15"
+                      Text="Tillbaka"
+                      Clicked="OptionMenuBack_Clicked"
+                      BackgroundColor="DarkSeaGreen"
+                      MaximumWidthRequest="400">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+                    <Button
+                      x:Name="ContinueOptionMenu"
+                      Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="15"
+                      Text="Spela julklaps spelet"
+                      Clicked="OptionMenuContinue_Clicked"
+                      BackgroundColor="DarkSeaGreen"
+                      MaximumWidthRequest="400">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+                </Grid>
                 <!--dice-->
-
                 <Border
                     x:Name="DiceText"
                     IsVisible="false"
@@ -158,36 +198,27 @@
                     BackgroundColor="DarkSeaGreen"
                     MaximumWidthRequest="400">
                     <Button.Shadow>
-                        <Shadow
-                            Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
-                <Grid> <!--forsätt här-->
-                    <Button
-                      x:Name="BackFromDice"
-                      Text="Tillbaka"
-                      IsVisible="false"
-                      Clicked="DiceRoll_Clicked"
-                      BackgroundColor="DarkSeaGreen"
-                      MaximumWidthRequest="400">
-                        <Button.Shadow>
-                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                        </Button.Shadow>
-                    </Button>
-                    <Button
-                      x:Name="ContinueFromDice"
-                      Text="Fortsätt till"
-                      IsVisible="false"
-                      Clicked="DiceRoll_Clicked"
-                      BackgroundColor="DarkSeaGreen"
-                      MaximumWidthRequest="400">
-                        <Button.Shadow>
-                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                        </Button.Shadow>
-                    </Button>
-                </Grid>                
-                
-                
+                <!--RandomGifts-->
+                <Entry x:Name="RandomGiftEntry" 
+                   IsVisible="false"
+                   Placeholder="Skriv hur många paket som ska slumpas ut:" 
+                   BackgroundColor="AntiqueWhite"
+                   TextColor="Black"
+                   MaximumWidthRequest="400"/>
+                <Button
+                    x:Name="RandomGiftButton"
+                    Text="Tryck för att slumpa"
+                    IsVisible="false"
+                    Clicked="RandomGift_Clicked"
+                    BackgroundColor="DarkSeaGreen"
+                    MaximumWidthRequest="400">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
                 <!-- When playing the game -->
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Border
@@ -219,19 +250,7 @@
                         </Grid>
                     </Border>
                 </HorizontalStackLayout>
-                <Button 
-                Text="Dra kort"
-                x:Name="DrawCard"
-                IsVisible="false"
-                Clicked="DrawCard_Clicked"
-                MaximumWidthRequest="400"
-                FontSize="22"
-                BackgroundColor="DarkSeaGreen">
-                    <Button.Shadow>
-                        <Shadow
-                         Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                    </Button.Shadow>
-                </Button>
+                <!--cards-->
                 <Border
                 x:Name="CardInPlay"
                 IsVisible="False"
@@ -265,6 +284,18 @@
                         </HorizontalStackLayout>
                     </Grid>
                 </Border>
+                <Button 
+                    Text="Dra kort"
+                    x:Name="DrawCard"
+                    IsVisible="false"
+                    Clicked="DrawCard_Clicked"
+                    MaximumWidthRequest="400"
+                    FontSize="22"
+                    BackgroundColor="DarkSeaGreen">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

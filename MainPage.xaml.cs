@@ -11,8 +11,6 @@
 
         async void AddPlayer_Clicked(object sender, EventArgs e)
         {
-            
-
             if (!string.IsNullOrWhiteSpace(PlayerEntry.Text))
             {
                 ViewModel.Players.Add(new Player { PlayerName = PlayerEntry.Text });
@@ -23,6 +21,15 @@
 
             await AddPlayer.ScaleToAsync(0.99, 120);
             await AddPlayer.ScaleToAsync(1, 120);
+        }
+
+        async void RandomGift_Clicked(object sender, EventArgs e) 
+        {
+            if (!string.IsNullOrWhiteSpace(RandomGiftEntry.Text)) 
+            {
+                ViewModel.RandomGift = RandomGiftEntry.Text;
+                
+            }
         }
 
         async void StartGame_Clicked(object sender, EventArgs e)
@@ -37,11 +44,12 @@
         }
         async void PlayDice_Clicked(object sender, EventArgs e)
         {
-            await PlayCards.ScaleToAsync(0.95, 120);
-            await PlayCards.ScaleToAsync(1, 120);
+            await Playdice.ScaleToAsync(0.95, 120);
+            await Playdice.ScaleToAsync(1, 120);
             MidGameGrid.IsVisible = false;
             DiceText.IsVisible = true;
             DiceRollButton.IsVisible = true;
+            OptionMenu.IsVisible = true;
         }
         async void RandomGiveGift_Clicked(object sender, EventArgs e) 
         {
@@ -91,6 +99,23 @@
 
             await DiceText.ScaleToAsync(0.9, 120);
             await DiceText.ScaleToAsync(1, 120);
+        }
+
+        async void OptionMenuContinue_Clicked(object sender, EventArgs e) 
+        {
+            PlayerList.IsVisible = true;
+            DrawCard.IsVisible = true;
+            DiceText.IsVisible = false;
+            DiceRollButton.IsVisible = false;
+            OptionMenu.IsVisible = false;
+        }
+
+        async void OptionMenuBack_Clicked(object sender, EventArgs e) 
+        {
+            MidGameGrid.IsVisible = true;
+            DiceText.IsVisible = false;
+            DiceRollButton.IsVisible = false;
+            OptionMenu.IsVisible = false;
         }
 
     }

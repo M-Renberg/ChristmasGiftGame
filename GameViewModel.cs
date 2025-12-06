@@ -61,7 +61,19 @@ public class GameViewModel : INotifyPropertyChanged
             }
         }
     }
-
+    private string? _randomGiftCount;
+    public string? RandomGiftCount
+    {
+        get => _randomGiftCount;
+        set
+        {
+            if (_randomGiftCount != value)
+            {
+                _randomGiftCount = value;
+                OnPropertyChanged(nameof(RandomGiftCount));
+            }
+        }
+    }
 
     public GameViewModel()
     {
@@ -159,6 +171,20 @@ public class GameViewModel : INotifyPropertyChanged
         else
         {
             DiceColor = Colors.Black; 
+        }
+    }
+
+    public void RandomGiftGenerator() 
+    { 
+       if(int.TryParse(RandomGift, out int TotalGifts))
+        {
+            int numbersofplayers = 0;
+            for(int i = 0; i < Players.Count; i++)
+            {
+                numbersofplayers++;
+            }
+            int presentsforeach = 0;
+            presentsforeach = TotalGifts / numbersofplayers;
         }
     }
 
