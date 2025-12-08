@@ -28,8 +28,12 @@
             if (!string.IsNullOrWhiteSpace(RandomGiftEntry.Text)) 
             {
                 ViewModel.RandomGift = RandomGiftEntry.Text;
-                
             }
+            ViewModel.RandomGiftGenerator();
+            PlayerListRandom.IsVisible = true;
+            RandomGiftEntry.IsVisible = false;
+            RandomGiftButton.IsVisible = false;
+            OptionMenu.IsVisible = true;
         }
 
         async void StartGame_Clicked(object sender, EventArgs e)
@@ -56,6 +60,8 @@
             await RandomGiveGifts.ScaleToAsync(0.95, 120);
             await RandomGiveGifts.ScaleToAsync(1, 120);
             MidGameGrid.IsVisible = false;
+            RandomGiftEntry.IsVisible = true;
+            RandomGiftButton.IsVisible = true;
         }
         async void PlayCards_Clicked(object sender, EventArgs e) 
         {
