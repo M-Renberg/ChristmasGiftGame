@@ -219,6 +219,42 @@
                         <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
+
+
+                <Border x:Name="PlayerListRandom"
+                        IsVisible="False"
+                        BackgroundColor="White"
+                        Stroke="DarkRed"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="20"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                    <Grid RowDefinitions="auto, *">
+                        <Label Text="Spelare:"
+                               Grid.Row="0"
+                               FontSize="26" 
+                               TextColor="Black"
+                               FontAttributes="Bold"/>
+                        <CollectionView ItemsSource="{Binding Players}" Grid.Row="1">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="10" Orientation="Horizontal">
+                                        <Label Text="{Binding PlayerName}"
+                               TextColor="Black"
+                               FontSize="22"
+                               />
+
+                                     <Label Text="{Binding GiftCount, StringFormat='Paket: {0}'}"
+                               TextColor="Red"
+                               FontSize="22"
+                               FontAttributes="Bold" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Border>
+
                 <!-- When playing the game -->
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Border

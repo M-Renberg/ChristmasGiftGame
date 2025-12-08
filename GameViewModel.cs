@@ -61,16 +61,16 @@ public class GameViewModel : INotifyPropertyChanged
             }
         }
     }
-    private string? _randomGiftCount;
-    public string? RandomGiftCount
+    private string? _randomGift;
+    public string? RandomGift
     {
-        get => _randomGiftCount;
+        get => _randomGift;
         set
         {
-            if (_randomGiftCount != value)
+            if (_randomGift != value)
             {
-                _randomGiftCount = value;
-                OnPropertyChanged(nameof(RandomGiftCount));
+                _randomGift = value;
+                OnPropertyChanged(nameof(RandomGift));
             }
         }
     }
@@ -174,17 +174,22 @@ public class GameViewModel : INotifyPropertyChanged
         }
     }
 
-    public void RandomGiftGenerator() 
-    { 
-       if(int.TryParse(RandomGift, out int TotalGifts))
+
+    public void RandomGiftGenerator()
+    {
+        if (int.TryParse(RandomGift, out int totalGifts) && Players.Count > 0)
         {
-            int numbersofplayers = 0;
-            for(int i = 0; i < Players.Count; i++)
+            foreach (var player in Players)
             {
-                numbersofplayers++;
+                player.GiftCount = 0;
             }
-            int presentsforeach = 0;
-            presentsforeach = TotalGifts / numbersofplayers;
+
+            for (int i = 0; i < totalGifts; i++)
+            {
+                int randomIndex = random.Next(Players.Count);
+
+                Players[randomIndex].GiftCount++;
+            }
         }
     }
 
