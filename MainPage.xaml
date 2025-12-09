@@ -5,40 +5,35 @@
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              BackgroundColor="Red">
     <Grid>
-
-
         <skia:SKLottieView
             Source="Snow.json"
             RepeatCount="-1"
-            HorizontalOptions="Fill"
+            InputTransparent="True"
+            HeightRequest="1000"
+            WidthRequest="1300"
             VerticalOptions="Fill"
-            InputTransparent="True" />
-
+            HorizontalOptions="Fill"
+            />
         <ScrollView>
-
             <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
                 <!-- Header  -->
-                <Label
-                Text="Christmas Gift Game" 
-                FontSize="32" 
-                Style="{StaticResource Headline}" 
-                SemanticProperties.HeadingLevel="Level1" 
-                TextColor="AntiqueWhite" 
-                HorizontalOptions="Center" 
-                FontAttributes="Bold"
-                FontFamily="Miriam"
-                Padding="20"/>
+                <Image Source="logo.png"
+                       WidthRequest="200"
+                       HeightRequest="150"
+                       VerticalOptions="Center"
+                       Margin="10"
+                       Opacity="0.9"/>
                 <!-- When adding players  -->
                 <Entry x:Name="PlayerEntry" 
                    IsVisible="True"
-                   Placeholder="lägg till spelare: " 
+                   Placeholder="lägg till spelare: "
+                   PlaceholderColor="DarkSlateGray"
                    BackgroundColor="AntiqueWhite"
                    TextColor="Black"
                    MaximumWidthRequest="400"
-                  />
-
+                   FontSize="20"/>
                 <Button Text="Lägg till"
                     x:Name="AddPlayer"
                     Clicked="AddPlayer_Clicked" 
@@ -63,12 +58,12 @@
                             Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
-                
+
                 <!--inbetween-->
                 <Grid
                     x:Name="MidGameGrid"
-                    RowDefinitions="Auto, *" 
-                    ColumnDefinitions="Auto, *"
+                    RowDefinitions="auto, auto, auto, auto" 
+                    ColumnDefinitions="*"
                     IsVisible="False"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
@@ -92,8 +87,8 @@
                     <!--random gift-->
                     <Button
                         x:Name="RandomGiveGifts"
-                        Grid.Row="0"
-                        Grid.Column="1"
+                        Grid.Row="1"
+                        Grid.Column="0"
                         Padding="10"
                         Margin="25"
                         Clicked="RandomGiveGift_Clicked" 
@@ -108,7 +103,7 @@
                     <!--card game-->
                     <Button
                         x:Name="PlayCards"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         Grid.Column="0"
                         Padding="10"
                         Margin="25"
@@ -116,7 +111,7 @@
                         MaximumWidthRequest="400"
                         FontSize="22"
                         BackgroundColor="DarkSeaGreen"
-                        Text="Spela julklaps spelet">
+                        Text="Spela julklappsspelet">
                         <Button.Shadow>
                             <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                         </Button.Shadow>
@@ -124,8 +119,8 @@
                     <!--back-->
                     <Button
                         x:Name="BackFromMid"
-                        Grid.Row="1"
-                        Grid.Column="1"
+                        Grid.Row="3"
+                        Grid.Column="0"
                         Padding="10"
                         Margin="25"
                         Clicked="BackMid_Clicked" 
@@ -138,42 +133,7 @@
                         </Button.Shadow>
                     </Button>
                 </Grid>
-                <!--Options menu-->
-                <Grid
-                    RowDefinitions="Auto, *" 
-                    ColumnDefinitions="Auto, *"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Padding="20"
-                    x:Name="OptionMenu"
-                    IsVisible="False">
-                    <Button
-                      x:Name="BackOptionsMenu"
-                      Grid.Row="0"
-                      Grid.Column="0"
-                      Margin="15"
-                      Text="Tillbaka"
-                      Clicked="OptionMenuBack_Clicked"
-                      BackgroundColor="DarkSeaGreen"
-                      MaximumWidthRequest="400">
-                        <Button.Shadow>
-                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                        </Button.Shadow>
-                    </Button>
-                    <Button
-                      x:Name="ContinueOptionMenu"
-                      Grid.Row="0"
-                      Grid.Column="1"
-                      Margin="15"
-                      Text="Spela julklaps spelet"
-                      Clicked="OptionMenuContinue_Clicked"
-                      BackgroundColor="DarkSeaGreen"
-                      MaximumWidthRequest="400">
-                        <Button.Shadow>
-                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                        </Button.Shadow>
-                    </Button>
-                </Grid>
+
                 <!--dice-->
                 <Border
                     x:Name="DiceText"
@@ -183,6 +143,7 @@
                     MaximumHeightRequest="150"
                     Stroke="DarkRed"
                     StrokeShape="RoundRectangle 10"
+                    Margin="15"
                     Padding="20">
                     <Label Text="{Binding DiceSideShown}"
                            FontSize="46"
@@ -193,6 +154,8 @@
                 <Button
                     x:Name="DiceRollButton"
                     Text="Rulla tärning"
+                    Margin="15"
+                    FontSize="22"
                     IsVisible="false"
                     Clicked="DiceRoll_Clicked"
                     BackgroundColor="DarkSeaGreen"
@@ -204,23 +167,25 @@
                 <!--RandomGifts-->
                 <Entry x:Name="RandomGiftEntry" 
                    IsVisible="false"
-                   Placeholder="Skriv hur många paket som ska slumpas ut:" 
+                   Placeholder="Skriv hur många paket som ska slumpas ut:"
+                   PlaceholderColor="DarkSlateGray"
                    BackgroundColor="AntiqueWhite"
                    TextColor="Black"
-                   MaximumWidthRequest="400"/>
+                   MaximumWidthRequest="400"
+                   FontSize="16"/>
                 <Button
                     x:Name="RandomGiftButton"
                     Text="Tryck för att slumpa"
                     IsVisible="false"
                     Clicked="RandomGift_Clicked"
                     BackgroundColor="DarkSeaGreen"
-                    MaximumWidthRequest="400">
+                    MaximumWidthRequest="400"
+                    FontSize="22">
                     <Button.Shadow>
                         <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
-
-
+                <!--Random lista-->
                 <Border x:Name="PlayerListRandom"
                         IsVisible="False"
                         BackgroundColor="White"
@@ -228,33 +193,32 @@
                         StrokeShape="RoundRectangle 10"
                         Padding="20"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center">
-                    <Grid RowDefinitions="auto, *">
-                        <Label Text="Spelare:"
-                               Grid.Row="0"
-                               FontSize="26" 
-                               TextColor="Black"
-                               FontAttributes="Bold"/>
+                        HorizontalOptions="Center"
+                        MaximumWidthRequest="350">
+                    <Grid RowDefinitions="auto, *"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"
+                          Padding="5">
                         <CollectionView ItemsSource="{Binding Players}" Grid.Row="1">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="10" Orientation="Horizontal">
-                                        <Label Text="{Binding PlayerName}"
-                               TextColor="Black"
-                               FontSize="22"
-                               />
-
-                                     <Label Text="{Binding GiftCount, StringFormat='Paket: {0}'}"
-                               TextColor="Red"
-                               FontSize="22"
-                               FontAttributes="Bold" />
+                                        <Label  Text="{Binding PlayerName}"
+                                                TextColor="Black"
+                                                FontSize="22" />
+                                        <Label Text=":    "
+                                               TextColor="Black"
+                                               FontSize="22"/>
+                                        <Label  Text="{Binding GiftCount, StringFormat='Paket: {0}'}"
+                                                TextColor="Red"
+                                                FontSize="22"
+                                                FontAttributes="Bold" />
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </Grid>
                 </Border>
-
                 <!-- When playing the game -->
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Border
@@ -269,16 +233,19 @@
                         <Grid RowDefinitions="auto, *">
                             <Label Text="Spelare:"
                                    Grid.Row="0"
-                                   FontSize="26" 
+                                   FontSize="22" 
                                    TextColor="Black"
-                                   FontAttributes="Bold"/>
-                            <CollectionView ItemsSource="{Binding Players}" Grid.Row="1"> <!--display players-->
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"/>
+                            <CollectionView ItemsSource="{Binding Players}" Grid.Row="1">
+                                <!--display players-->
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <StackLayout Padding="10">
                                             <Label Text="{Binding PlayerName}"
                                                TextColor="Black"
-                                                FontSize="22"/>
+                                                FontSize="18"
+                                                   HorizontalTextAlignment="Center"/>
                                         </StackLayout>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -290,34 +257,30 @@
                 <Border
                 x:Name="CardInPlay"
                 IsVisible="False"
-                BackgroundColor="White"
+                BackgroundColor="AntiqueWhite"
                 Stroke="DarkRed"
                 StrokeShape="RoundRectangle 10"
                 Padding="20"
                 VerticalOptions="Center"
-                HorizontalOptions="Center">
+                HorizontalOptions="Center"
+                MaximumWidthRequest="350">
                     <Border.Shadow>
                         <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Border.Shadow>
-
-                    <Grid RowDefinitions="Auto, *" ColumnDefinitions="*">
-                        <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
-                            <Image
-                        Source="{Binding CardImage}"
-                        Aspect="AspectFit"
-                        Opacity="0.9"
-                        VerticalOptions="Center"
-                        WidthRequest="80"
-                        />
-
-                            <Label Text="{Binding CurrentCard}" 
-                       FontSize="24" 
-                       TextColor="Black" 
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       MaximumHeightRequest="300"
-                       LineBreakMode="WordWrap"/>
-                        </HorizontalStackLayout>
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                        <Image Grid.Column="0"
+                               Source="{Binding CardImage}"
+                               Aspect="AspectFit"
+                               Opacity="0.9"
+                               VerticalOptions="Center"
+                               WidthRequest="80"/>
+                        <Label Grid.Column="1"
+                               Text="{Binding CurrentCard}" 
+                               FontSize="24" 
+                               TextColor="Black" 
+                               HorizontalTextAlignment="Start" 
+                               VerticalTextAlignment="Center"
+                               LineBreakMode="WordWrap"/>
                     </Grid>
                 </Border>
                 <Button 
@@ -332,6 +295,57 @@
                         <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
+                <!--Options menu-->
+                <Grid
+                    RowDefinitions="Auto, Auto" 
+                    ColumnDefinitions="*"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Padding="5"
+                    x:Name="OptionMenu"
+                    IsVisible="False">
+                    <Button
+                      x:Name="BackOptionsMenu"
+                      Grid.Row="0"
+                      Margin="5"
+                      Text="Tillbaka"
+                      Clicked="OptionMenuBack_Clicked"
+                      BackgroundColor="DarkSeaGreen"
+                      MaximumWidthRequest="400"
+                      FontSize="20">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+                    <Button
+                          x:Name="ContinueOptionMenu"
+                          Grid.Row="1"
+                          Margin="10"
+                          Text="Spela julklappsspelet"
+                          Clicked="OptionMenuContinue_Clicked"
+                          BackgroundColor="DarkSeaGreen"
+                          MaximumWidthRequest="400"
+                          FontSize="20">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+                    <!--quit game-->
+                    <Button
+                          x:Name="QuitGameButton"
+                          IsVisible="False"
+                          Margin="10"
+                          Text="Avsluta Spelet"
+                          Clicked="QuitGame_Clicked"
+                          BackgroundColor="DarkSeaGreen"
+                          MaximumWidthRequest="400"
+                          FontSize="24">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                        </Button.Shadow>
+                    </Button>
+
+                </Grid>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

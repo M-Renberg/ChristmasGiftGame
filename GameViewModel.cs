@@ -193,4 +193,12 @@ public class GameViewModel : INotifyPropertyChanged
         }
     }
 
+    public void DeletePlayers()
+    {
+        for(int i = 0; i<= Players.Count; i++)
+        {
+            Players.RemoveAt(i);
+        }
+    }
+
 }

@@ -91,6 +91,10 @@
                 CardInPlay.IsVisible = true;
             }
             ViewModel.DrawCard();
+            if(ViewModel.CurrentCard == "Spelet är nu slut. God jul")
+            {
+                QuitGameButton.IsVisible = true;
+            }
 
             await CardInPlay.ScaleToAsync(0.9, 120);
             await CardInPlay.ScaleToAsync(1.0, 120);
@@ -122,6 +126,21 @@
             DiceText.IsVisible = false;
             DiceRollButton.IsVisible = false;
             OptionMenu.IsVisible = false;
+            PlayerListRandom.IsVisible = false;
+        }
+
+        async void QuitGame_Clicked(object sender, EventArgs e)
+        {
+            await PlayCards.ScaleToAsync(0.95, 120);
+            await PlayCards.ScaleToAsync(1, 120);
+            
+            PlayerList.IsVisible = false;
+            DrawCard.IsVisible = false;
+            PlayerEntry.IsVisible = true;
+            StartGame.IsVisible = true;
+
+            ViewModel.DeletePlayers();
+
         }
 
     }
