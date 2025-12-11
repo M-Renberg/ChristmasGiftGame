@@ -62,6 +62,7 @@
             MidGameGrid.IsVisible = false;
             RandomGiftEntry.IsVisible = true;
             RandomGiftButton.IsVisible = true;
+            OptionMenu.IsVisible = true;
         }
         async void PlayCards_Clicked(object sender, EventArgs e) 
         {
@@ -95,8 +96,16 @@
             {
                 QuitGameButton.IsVisible = true;
             }
+            else if(ViewModel.CurrentCard == "Du måste ha minst 2 spelare för att kunna spela")
+            {
+                QuitGameButton.IsVisible = true;
+            }
+            else if(ViewModel.CurrentCard == "Du spelar själv så du kan öppna alla presenterna nu")
+            {
+                QuitGameButton.IsVisible = true;
+            }
 
-            await CardInPlay.ScaleToAsync(0.9, 120);
+                await CardInPlay.ScaleToAsync(0.9, 120);
             await CardInPlay.ScaleToAsync(1.0, 120);
         }
 
@@ -113,20 +122,30 @@
 
         async void OptionMenuContinue_Clicked(object sender, EventArgs e) 
         {
+            await ContinueOptionMenu.ScaleToAsync(0.95, 120);
+            await ContinueOptionMenu.ScaleToAsync(1, 120);
+
             PlayerList.IsVisible = true;
             DrawCard.IsVisible = true;
             DiceText.IsVisible = false;
             DiceRollButton.IsVisible = false;
             OptionMenu.IsVisible = false;
+            RandomGiftEntry.IsVisible = false;
+            RandomGiftButton.IsVisible = false;
         }
 
         async void OptionMenuBack_Clicked(object sender, EventArgs e) 
         {
+            await BackOptionsMenu.ScaleToAsync(0.95, 120);
+            await BackOptionsMenu.ScaleToAsync(1, 120);
+
             MidGameGrid.IsVisible = true;
             DiceText.IsVisible = false;
             DiceRollButton.IsVisible = false;
             OptionMenu.IsVisible = false;
             PlayerListRandom.IsVisible = false;
+            RandomGiftEntry.IsVisible = false;
+            RandomGiftButton.IsVisible = false;
         }
 
         async void QuitGame_Clicked(object sender, EventArgs e)
@@ -138,6 +157,7 @@
             DrawCard.IsVisible = false;
             PlayerEntry.IsVisible = true;
             StartGame.IsVisible = true;
+            QuitGameButton.IsVisible = false;
 
             ViewModel.DeletePlayers();
 

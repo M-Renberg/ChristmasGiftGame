@@ -11,4 +11,14 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
+    <ShellContent
+        Title="FAQ"
+        ContentTemplate="{DataTemplate local:FaqPage}"
+        Route="FaqPage"/>
+
+    <ShellContent
+        Title="Info &amp; Support"
+        ContentTemplate="{DataTemplate local:SupportPage}"
+        Route="SupportPage"/>
+
 </Shell>

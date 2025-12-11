@@ -2,11 +2,52 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChristmasGiftGame.SupportPage"
-             Title="SupportPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="SupportPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             BackgroundColor="Red">
+    <Grid>
+        <skia:SKLottieView
+        Source="Snow.json"
+        RepeatCount="-1"
+        InputTransparent="True"
+        HeightRequest="1000"
+        WidthRequest="1300"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill"
+        />
+        <ScrollView>
+            <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25">
+                <!-- Header  -->
+                <Image Source="logo.png"
+                       WidthRequest="600"
+                       HeightRequest="129"
+                       Opacity="0.9"
+                       />
+                <Border
+                    x:Name="SupportBorder"
+                        IsVisible="True"
+                        BackgroundColor="AntiqueWhite"
+                        Stroke="DarkRed"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="20"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        MaximumWidthRequest="350"
+                        Margin="25">
+                    <StackLayout>
+                        <Label Text="Vid problem med appan kan du höra av dig till: mr.appworks@gmail.com"
+                               FontSize="22"
+                               TextColor="Black"/>
+                        <Label Text=" "/>
+                        <Label Text="Denna app är gjord som ett sidoprojekt då jag studerar IT och programmering."
+                               FontSize="20"
+                               TextColor="Black"/>
+
+                    </StackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

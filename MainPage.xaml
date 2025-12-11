@@ -20,14 +20,14 @@
             Spacing="25">
                 <!-- Header  -->
                 <Image Source="logo.png"
-                       WidthRequest="200"
-                       HeightRequest="150"
-                       VerticalOptions="Center"
-                       Margin="10"
-                       Opacity="0.9"/>
+                       WidthRequest="600"
+                       HeightRequest="129"
+                       Opacity="0.9"
+                       />
                 <!-- When adding players  -->
                 <Entry x:Name="PlayerEntry" 
                    IsVisible="True"
+                   Margin="25"
                    Placeholder="lägg till spelare: "
                    PlaceholderColor="DarkSlateGray"
                    BackgroundColor="AntiqueWhite"
@@ -67,7 +67,8 @@
                     IsVisible="False"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
-                    Padding="20">
+                    Padding="20"
+                    Margin="25">
                     <!--dice game-->
                     <Button
                         x:Name="Playdice" 
@@ -143,7 +144,7 @@
                     MaximumHeightRequest="150"
                     Stroke="DarkRed"
                     StrokeShape="RoundRectangle 10"
-                    Margin="15"
+                    Margin="25"
                     Padding="20">
                     <Label Text="{Binding DiceSideShown}"
                            FontSize="46"
@@ -172,7 +173,8 @@
                    BackgroundColor="AntiqueWhite"
                    TextColor="Black"
                    MaximumWidthRequest="400"
-                   FontSize="16"/>
+                   FontSize="16"
+                   Margin="25"/>
                 <Button
                     x:Name="RandomGiftButton"
                     Text="Tryck för att slumpa"
@@ -188,13 +190,14 @@
                 <!--Random lista-->
                 <Border x:Name="PlayerListRandom"
                         IsVisible="False"
-                        BackgroundColor="White"
+                        BackgroundColor="AntiqueWhite"
                         Stroke="DarkRed"
                         StrokeShape="RoundRectangle 10"
                         Padding="20"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
-                        MaximumWidthRequest="350">
+                        MaximumWidthRequest="350"
+                        Margin="25">
                     <Grid RowDefinitions="auto, *"
                           VerticalOptions="Center"
                           HorizontalOptions="Center"
@@ -229,7 +232,8 @@
                     StrokeShape="RoundRectangle 10"
                     Padding="20"
                     VerticalOptions="Center"
-                    HorizontalOptions="Center">
+                    HorizontalOptions="Center"
+                    Margin="25">
                         <Grid RowDefinitions="auto, *">
                             <Label Text="Spelare:"
                                    Grid.Row="0"
@@ -263,7 +267,8 @@
                 Padding="20"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                MaximumWidthRequest="350">
+                MaximumWidthRequest="350"
+                Margin="25">
                     <Border.Shadow>
                         <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Border.Shadow>

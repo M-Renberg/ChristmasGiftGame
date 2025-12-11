@@ -149,7 +149,6 @@ public class GameViewModel : INotifyPropertyChanged
         }
         else if (Players.Count >= 3)
         {
-            Cards.Add(new Card { Text = "ni är 3 eller fler st" });
             foreach(var p in Players)
             {
                 Cards.Add(new Card { Text = $"{p.PlayerName} får ta ett valfritt paket" });

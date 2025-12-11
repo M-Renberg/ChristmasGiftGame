@@ -19,7 +19,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>ChristmasGiftGame</ApplicationTitle>
+		<ApplicationTitle>Julklappsspelet</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.christmasgiftgame</ApplicationId>
@@ -40,7 +40,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -69,6 +69,15 @@
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="FaqPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SupportPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
