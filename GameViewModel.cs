@@ -154,6 +154,7 @@ public class GameViewModel : INotifyPropertyChanged
                 Cards.Add(new Card { Text = $"{p.PlayerName} får ta ett valfritt paket" });
                 Cards.Add(new Card { Text = $"{p.PlayerName} måste ge bort ett valfritt paket" });
                 Cards.Add(new Card { Text = $"{p.PlayerName} måste byta plats med en annan spelare" });
+                Cards.Add(new Card { Text = $"Ge ett valfritt paket till {p.PlayerName}" });
             }
         }
     }
