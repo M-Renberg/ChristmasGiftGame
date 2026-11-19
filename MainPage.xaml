@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChristmasGiftGame.MainPage"
+             Title="Julklappsspelet"
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              BackgroundColor="Red">
     <Grid>
@@ -168,7 +169,8 @@
                 <!--RandomGifts-->
                 <Entry x:Name="RandomGiftEntry" 
                    IsVisible="false"
-                   Placeholder="Skriv hur många paket som ska slumpas ut:"
+                   Placeholder="Hur många paket ska slumpas ut?"
+                   Keyboard="Numeric"
                    PlaceholderColor="DarkSlateGray"
                    BackgroundColor="AntiqueWhite"
                    TextColor="Black"
@@ -300,6 +302,19 @@
                         <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                     </Button.Shadow>
                 </Button>
+                <!--quit game-->
+                <Button
+                    x:Name="QuitGameButton"
+                    IsVisible="False"
+                    Text="Avsluta spelet"
+                    Clicked="QuitGame_Clicked"
+                    BackgroundColor="DarkSeaGreen"
+                    MaximumWidthRequest="400"
+                    FontSize="22">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
+                    </Button.Shadow>
+                </Button>
                 <!--Options menu-->
                 <Grid
                     RowDefinitions="Auto, Auto" 
@@ -335,21 +350,6 @@
                             <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
                         </Button.Shadow>
                     </Button>
-                    <!--quit game-->
-                    <Button
-                          x:Name="QuitGameButton"
-                          IsVisible="False"
-                          Margin="10"
-                          Text="Avsluta Spelet"
-                          Clicked="QuitGame_Clicked"
-                          BackgroundColor="DarkSeaGreen"
-                          MaximumWidthRequest="400"
-                          FontSize="24">
-                        <Button.Shadow>
-                            <Shadow Brush="Black" Opacity="0.3" Offset="5,5" Radius="20"/>
-                        </Button.Shadow>
-                    </Button>
-
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

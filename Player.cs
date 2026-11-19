@@ -15,7 +15,7 @@ public class Player : INotifyPropertyChanged
             if (_giftCount != value)
             {
                 _giftCount = value;
-                // Detta är viktigt för att listan ska uppdateras live
+                // Detta Ã¤r viktigt fÃ¶r att listan ska uppdateras live
                 OnPropertyChanged(nameof(GiftCount));
             }
         }

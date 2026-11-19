@@ -1,25 +1,26 @@
-using ChristmasGiftGame;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.Json;
 
+namespace ChristmasGiftGame;
+
 public class GameViewModel : INotifyPropertyChanged
 {
+    public const int MaxRandomGifts = 200;
+    const int CardImageCount = 6;
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public string? CardImage { get; set; }
-
     void OnPropertyChanged(string name) =>
-    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-    public ObservableCollection<Player> Players { get; set; } = new();
-    public ObservableCollection<Card> Cards = new();
-    
+    public ObservableCollection<Player> Players { get; } = new();
 
-    public Random random = new();
+    readonly List<Card> _cards = new();
+    readonly Random _random = new();
 
-    public string? _currentCard;
+    private string? _currentCard;
     public string? CurrentCard
     {
         get => _currentCard;
@@ -33,7 +34,33 @@ public class GameViewModel : INotifyPropertyChanged
         }
     }
 
-    public string[] diceNumbers = ["1","2","3","4","5","6"];
+    private string? _cardImage;
+    public string? CardImage
+    {
+        get => _cardImage;
+        set
+        {
+            if (_cardImage != value)
+            {
+                _cardImage = value;
+                OnPropertyChanged(nameof(CardImage));
+            }
+        }
+    }
+
+    private bool _isGameOver;
+    public bool IsGameOver
+    {
+        get => _isGameOver;
+        private set
+        {
+            if (_isGameOver != value)
+            {
+                _isGameOver = value;
+                OnPropertyChanged(nameof(IsGameOver));
+            }
+        }
+    }
 
     private string? _diceSideShown;
     public string? DiceSideShown
@@ -41,14 +68,12 @@ public class GameViewModel : INotifyPropertyChanged
         get => _diceSideShown;
         set
         {
-            
-          _diceSideShown = value;
-          OnPropertyChanged(nameof(DiceSideShown));
-            
-            
+            _diceSideShown = value;
+            OnPropertyChanged(nameof(DiceSideShown));
         }
     }
-    private Color _diceColor = Colors.Black; // Standardf‰rg
+
+    private Color _diceColor = Colors.Black; // Standardf√§rg
     public Color DiceColor
     {
         get => _diceColor;
@@ -61,54 +86,64 @@ public class GameViewModel : INotifyPropertyChanged
             }
         }
     }
-    private string? _randomGift;
-    public string? RandomGift
-    {
-        get => _randomGift;
-        set
-        {
-            if (_randomGift != value)
-            {
-                _randomGift = value;
-                OnPropertyChanged(nameof(RandomGift));
-            }
-        }
-    }
 
     public GameViewModel()
     {
-        GenerateCards(); // add cards here
+        GenerateCards();
     }
 
     public void DrawCard()
     {
-        if (Cards.Count == 0) 
+        if (IsGameOver)
+            return;
+
+        if (Players.Count == 0)
         {
-            Cards.Add(new Card { Text = "Spelet ‰r nu slut. God jul" });
+            EndGame("Du m√•ste ha minst 2 spelare f√∂r att kunna spela");
             return;
         }
 
-        int index = random.Next(Cards.Count);
-        CurrentCard = Cards[index].Text;
-        Cards.RemoveAt(index);
+        if (Players.Count == 1)
+        {
+            EndGame("Du spelar sj√§lv s√• du kan √∂ppna alla presenterna nu");
+            return;
+        }
 
-        int img = random.Next(1, 6);
-        CardImage = $"card{img}.png";
-        OnPropertyChanged(nameof(CardImage));
+        if (_cards.Count == 0)
+        {
+            EndGame("Spelet √§r nu slut. God jul!");
+            return;
+        }
+
+        int index = _random.Next(_cards.Count);
+        CurrentCard = _cards[index].Text;
+        _cards.RemoveAt(index);
+        SetRandomCardImage();
     }
+
+    void EndGame(string message)
+    {
+        CurrentCard = message;
+        SetRandomCardImage();
+        IsGameOver = true;
+    }
+
+    // Next(1, 7) ger 1‚Äì6, √∂vre gr√§nsen √§r exklusiv
+    void SetRandomCardImage() =>
+        CardImage = $"card{_random.Next(1, CardImageCount + 1)}.png";
 
     public class CardList
     {
         public List<string>? Cards { get; set; }
     }
+
     public List<string> LoadCardsFromJson()
     {
         var assembly = Assembly.GetExecutingAssembly();
-        var resourceName = "ChristmasGiftGame.Data.cards.json"; // ‰ndra om din namespace/folder skiljer sig
+        var resourceName = "ChristmasGiftGame.Data.cards.json";
 
-        var stream = assembly.GetManifestResourceStream(resourceName);
-        if (stream == null)
-            throw new Exception($"Resource not found: {resourceName}");
+        using var stream = assembly.GetManifestResourceStream(resourceName)
+            ?? throw new InvalidOperationException($"Resource not found: {resourceName}");
 
         using var reader = new StreamReader(stream);
         string json = reader.ReadToEnd();
@@ -116,89 +151,70 @@ public class GameViewModel : INotifyPropertyChanged
         var data = JsonSerializer.Deserialize<CardList>(json);
         return data?.Cards ?? new List<string>();
     }
+
     public void GenerateCards()
     {
-        Cards.Clear();
+        _cards.Clear();
+        CurrentCard = null;
+        CardImage = null;
+        IsGameOver = false;
 
-
-        var baseCards = LoadCardsFromJson();
-
-        foreach (var text in baseCards)
+        foreach (var text in LoadCardsFromJson())
         {
-            Cards.Add(new Card { Text = text });
-        }
-        
-
-        if (Players.Count == 0)
-        {
-            Cards.Clear();
-            Cards.Add(new Card { Text = "Du mÂste ha minst 2 spelare fˆr att kunna spela" });
-            return;
+            _cards.Add(new Card { Text = text });
         }
 
-        if (Players.Count == 1)
+        if (Players.Count >= 3)
         {
-            Cards.Clear();
-            Cards.Add(new Card { Text = "Du spelar sj‰lv sÂ du kan ˆppna alla presenterna nu" });
-            return;
-        }
-
-        if(Players.Count == 2)
-        {
-            return;
-        }
-        else if (Players.Count >= 3)
-        {
-            foreach(var p in Players)
+            foreach (var p in Players)
             {
-                Cards.Add(new Card { Text = $"{p.PlayerName} fÂr ta ett valfritt paket" });
-                Cards.Add(new Card { Text = $"{p.PlayerName} mÂste ge bort ett valfritt paket" });
-                Cards.Add(new Card { Text = $"{p.PlayerName} mÂste byta plats med en annan spelare" });
-                Cards.Add(new Card { Text = $"Ge ett valfritt paket till {p.PlayerName}" });
+                _cards.Add(new Card { Text = $"{p.PlayerName} f√•r ta ett valfritt paket" });
+                _cards.Add(new Card { Text = $"{p.PlayerName} m√•ste ge bort ett valfritt paket" });
+                _cards.Add(new Card { Text = $"{p.PlayerName} m√•ste byta plats med en annan spelare" });
+                _cards.Add(new Card { Text = $"Ge ett valfritt paket till {p.PlayerName}" });
             }
         }
     }
 
     public void DiceRoll()
     {
-        int index = random.Next(diceNumbers.Length);
-        DiceSideShown = diceNumbers[index];
-
-        if (DiceSideShown == "1" || DiceSideShown == "6")
-        {
-            DiceColor = Colors.Red;
-        }
-        else
-        {
-            DiceColor = Colors.Black; 
-        }
+        int roll = _random.Next(1, 7);
+        DiceSideShown = roll.ToString();
+        DiceColor = roll is 1 or 6 ? Colors.Red : Colors.Black;
     }
 
-
-    public void RandomGiftGenerator()
+    /// <summary>
+    /// Slumpar ut paket bland spelarna. Returnerar ett felmeddelande, eller null om det gick bra.
+    /// </summary>
+    public string? DistributeRandomGifts(string? input)
     {
-        if (int.TryParse(RandomGift, out int totalGifts) && Players.Count > 0)
+        if (Players.Count == 0)
+            return "L√§gg till spelare f√∂rst.";
+
+        if (!int.TryParse(input?.Trim(), out int totalGifts) || totalGifts < 1)
+            return "Skriv hur m√•nga paket som ska slumpas ut (minst 1).";
+
+        if (totalGifts > MaxRandomGifts)
+            return $"Det g√•r att slumpa ut max {MaxRandomGifts} paket.";
+
+        foreach (var player in Players)
         {
-            foreach (var player in Players)
-            {
-                player.GiftCount = 0;
-            }
-
-            for (int i = 0; i < totalGifts; i++)
-            {
-                int randomIndex = random.Next(Players.Count);
-
-                Players[randomIndex].GiftCount++;
-            }
+            player.GiftCount = 0;
         }
+
+        for (int i = 0; i < totalGifts; i++)
+        {
+            Players[_random.Next(Players.Count)].GiftCount++;
+        }
+
+        return null;
     }
 
-    public void DeletePlayers()
+    public void ResetGame()
     {
-        for(int i = 0; i<= Players.Count; i++)
-        {
-            Players.RemoveAt(i);
-        }
+        Players.Clear();
+        DiceSideShown = null;
+        DiceColor = Colors.Black;
+        GenerateCards();
     }
-
 }
