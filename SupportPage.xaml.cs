@@ -14,8 +14,16 @@ public partial class SupportPage : ContentPage
 	{
 		base.OnAppearing();
 
-		if (_tipsLoaded || !TipService.IsSupported)
+		if (!TipService.IsSupported)
 			return;
+
+		if (_tipsLoaded)
+		{
+			// Försök igen med dricks som betalats men inte förbrukats (t.ex. en väntande betalning som blivit klar)
+			if (!_busy)
+				await TipService.RetryLeftoverTipsAsync();
+			return;
+		}
 
 		var options = await TipService.GetTipOptionsAsync();
 		if (options.Count == 0)

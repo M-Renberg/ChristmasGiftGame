@@ -17,7 +17,7 @@ public class GameViewModel : INotifyPropertyChanged
 
     public ObservableCollection<Player> Players { get; } = new();
 
-    readonly List<Card> _cards = new();
+    readonly List<string> _cards = new();
     readonly Random _random = new();
 
     private string? _currentCard;
@@ -97,35 +97,18 @@ public class GameViewModel : INotifyPropertyChanged
         if (IsGameOver)
             return;
 
-        if (Players.Count == 0)
-        {
-            EndGame("Du måste ha minst 2 spelare för att kunna spela");
-            return;
-        }
-
-        if (Players.Count == 1)
-        {
-            EndGame("Du spelar själv så du kan öppna alla presenterna nu");
-            return;
-        }
-
         if (_cards.Count == 0)
         {
-            EndGame("Spelet är nu slut. God jul!");
+            CurrentCard = "Spelet är nu slut. God jul!";
+            SetRandomCardImage();
+            IsGameOver = true;
             return;
         }
 
         int index = _random.Next(_cards.Count);
-        CurrentCard = _cards[index].Text;
+        CurrentCard = _cards[index];
         _cards.RemoveAt(index);
         SetRandomCardImage();
-    }
-
-    void EndGame(string message)
-    {
-        CurrentCard = message;
-        SetRandomCardImage();
-        IsGameOver = true;
     }
 
     // Next(1, 7) ger 1–6, övre gränsen är exklusiv
@@ -159,19 +142,16 @@ public class GameViewModel : INotifyPropertyChanged
         CardImage = null;
         IsGameOver = false;
 
-        foreach (var text in LoadCardsFromJson())
-        {
-            _cards.Add(new Card { Text = text });
-        }
+        _cards.AddRange(LoadCardsFromJson());
 
         if (Players.Count >= 3)
         {
             foreach (var p in Players)
             {
-                _cards.Add(new Card { Text = $"{p.PlayerName} får ta ett valfritt paket" });
-                _cards.Add(new Card { Text = $"{p.PlayerName} måste ge bort ett valfritt paket" });
-                _cards.Add(new Card { Text = $"{p.PlayerName} måste byta plats med en annan spelare" });
-                _cards.Add(new Card { Text = $"Ge ett valfritt paket till {p.PlayerName}" });
+                _cards.Add($"{p.PlayerName} får ta ett valfritt paket");
+                _cards.Add($"{p.PlayerName} måste ge bort ett valfritt paket");
+                _cards.Add($"{p.PlayerName} måste byta plats med en annan spelare");
+                _cards.Add($"Ge ett valfritt paket till {p.PlayerName}");
             }
         }
     }

@@ -3,6 +3,7 @@
     public partial class MainPage : ContentPage
     {
         private readonly GameViewModel ViewModel = new();
+        private bool _drawing;
 
         public MainPage()
         {
@@ -47,6 +48,16 @@
         async void StartGame_Clicked(object sender, EventArgs e)
         {
             await PressAsync(StartGame, 0.99);
+
+            if (ViewModel.Players.Count < 2)
+            {
+                var message = ViewModel.Players.Count == 1
+                    ? "Du spelar själv, så du kan öppna alla presenterna nu! 😉 Lägg till minst en spelare till för att spela."
+                    : "Lägg till minst 2 spelare för att kunna spela.";
+                await DisplayAlertAsync("För få spelare", message, "OK");
+                return;
+            }
+
             StartGame.IsVisible = false;
             AddPlayer.IsVisible = false;
             PlayerEntry.IsVisible = false;
@@ -91,18 +102,24 @@
 
         async void DrawCard_Clicked(object sender, EventArgs e)
         {
-            await PressAsync(DrawCard, 0.99);
+            // Snabba dubbeltryck får inte dra flera kort (det första skulle aldrig visas)
+            if (_drawing)
+                return;
 
-            ViewModel.DrawCard();
-            CardInPlay.IsVisible = true;
-
-            if (ViewModel.IsGameOver)
+            _drawing = true;
+            try
             {
-                DrawCard.IsVisible = false;
-                QuitGameButton.IsVisible = true;
-            }
+                await PressAsync(DrawCard, 0.99);
 
-            await PressAsync(CardInPlay, 0.9);
+                ViewModel.DrawCard();
+                ShowCardGame();
+
+                await PressAsync(CardInPlay, 0.9);
+            }
+            finally
+            {
+                _drawing = false;
+            }
         }
 
         async void DiceRoll_Clicked(object sender, EventArgs e)
@@ -121,6 +138,7 @@
             DiceText.IsVisible = false;
             DiceRollButton.IsVisible = false;
             OptionMenu.IsVisible = false;
+            PlayerListRandom.IsVisible = false;
             RandomGiftEntry.IsVisible = false;
             RandomGiftButton.IsVisible = false;
             ShowCardGame();
