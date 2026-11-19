@@ -47,6 +47,28 @@
 
                     </StackLayout>
                 </Border>
+                <!-- Bjud på en glögg (visas bara om produkterna kunde hämtas från Google Play) -->
+                <Border
+                    x:Name="TipBorder"
+                    IsVisible="False"
+                    BackgroundColor="AntiqueWhite"
+                    Stroke="DarkRed"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="20"
+                    HorizontalOptions="Center"
+                    MaximumWidthRequest="350"
+                    Margin="25,0,25,25">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Bjud på en glögg"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <Label Text="Appen är gratis och helt utan reklam. Om ni har haft roligt och vill tacka kan du bjuda utvecklaren på en glögg. Helt frivilligt, och du får inget extra i appen."
+                               FontSize="18"
+                               TextColor="Black"/>
+                        <VerticalStackLayout x:Name="TipButtons" Spacing="10"/>
+                    </VerticalStackLayout>
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
